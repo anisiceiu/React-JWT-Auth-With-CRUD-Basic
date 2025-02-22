@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 using EmployeeAPI.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace EmployeeAPI.Controllers
 {
@@ -33,6 +34,15 @@ namespace EmployeeAPI.Controllers
 
             }
             return result;
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterModel model)
+        {
+            //if (!ModelState.IsValid)
+            //    return BadRequest(ModelState);
+
+                return Ok(new { message = "User registered successfully!" });
         }
     }
 }
