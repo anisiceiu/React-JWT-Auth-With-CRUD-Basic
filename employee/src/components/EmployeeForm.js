@@ -19,7 +19,7 @@ const EmployeeForm = ({ isEdit = false }) => {
     } else {
       dispatch(addEmployee({ ...employee, id: Date.now().toString() }));
     }
-    navigate("/");
+    navigate("/list");
   };
 
   return (

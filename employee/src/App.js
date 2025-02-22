@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import AuthProvider from "./context/AuthContext";
 import Home from "./pages/Home";
 import AddEmployee from "./pages/AddEmployee";
 import EditEmployee from "./pages/EditEmployee";
@@ -13,6 +14,7 @@ import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
+    <AuthProvider>
     <Provider store={store}>
       <Router>
         <div className="container p-5">
@@ -25,13 +27,16 @@ const App = () => {
             <Route path="/register" element={<Register />} />
 
             {/* Protected Routes */}
-            <Route path="/list" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-            <Route path="/add" element={<ProtectedRoute><AddEmployee /></ProtectedRoute>} />
-            <Route path="/edit/:id" element={<ProtectedRoute><EditEmployee /></ProtectedRoute>} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/list" element={<Home />} />
+              <Route path="/add" element={<AddEmployee />} />
+              <Route path="/edit/:id" element={<EditEmployee />} />
+            </Route>
           </Routes>
         </div>
       </Router>
     </Provider>
+    </AuthProvider>
   );
 };
 
